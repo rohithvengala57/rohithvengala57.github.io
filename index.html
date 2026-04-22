@@ -184,6 +184,14 @@
     }
     .btn-outline:hover { background: rgba(0,212,255,0.07); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,212,255,0.18); }
 
+    .btn-ghost {
+      font-family: var(--mono); font-size: 13px; padding: 13px 28px;
+      background: transparent; color: var(--neon); border: 1px solid rgba(0,255,136,0.4);
+      border-radius: 6px; cursor: pointer; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 8px; transition: all 0.3s;
+    }
+    .btn-ghost:hover { background: rgba(0,255,136,0.07); border-color: var(--neon); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,255,136,0.15); }
+
     .scroll-hint {
       position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
       display: flex; flex-direction: column; align-items: center; gap: 6px;
@@ -491,6 +499,10 @@
     <li><a href="#projects"><span class="num">04.</span>projects</a></li>
     <li><a href="#education"><span class="num">05.</span>education</a></li>
     <li><a href="#contact" class="nav-cta">contact</a></li>
+    <li><a href="resume.html" target="_blank" style="font-family:var(--mono);font-size:12px;color:var(--neon);border:1px solid rgba(0,255,136,0.4);padding:6px 14px;border-radius:4px;text-decoration:none;transition:all 0.3s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.background='rgba(0,255,136,0.07)'" onmouseout="this.style.background='transparent'">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      resume
+    </a></li>
   </ul>
   <div class="hamburger" id="hbg"><span></span><span></span><span></span></div>
 </nav>
@@ -501,6 +513,7 @@
   <a href="#projects"   onclick="closeMenu()">04. projects</a>
   <a href="#education"  onclick="closeMenu()">05. education</a>
   <a href="#contact"    onclick="closeMenu()">06. contact</a>
+  <a href="resume.html" target="_blank" onclick="closeMenu()" style="color:var(--neon)">↓ download resume</a>
 </div>
 
 <!-- HERO -->
@@ -528,6 +541,10 @@
       <a href="#contact" class="btn-outline">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
         Contact Me
+      </a>
+      <a href="resume.html" target="_blank" class="btn-ghost">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download Resume
       </a>
     </div>
   </div>

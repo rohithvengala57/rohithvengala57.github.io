@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rohith Vengala — Resume</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ── SCREEN STYLES ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --accent: #1a56db;
+      --text: #111827;
+      --muted: #4b5563;
+      --dim: #6b7280;
+      --border: #e5e7eb;
+      --bg-page: #f3f4f6;
+      --bg-card: #ffffff;
+      --sans: 'Inter', Arial, sans-serif;
+    }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg-page);
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.6;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    /* ── TOP BAR (hidden on print) ── */
+    .topbar {
+      background: #111827;
+      color: #e5e7eb;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .topbar-left { display: flex; align-items: center; gap: 12px; }
+    .topbar-left span { font-size: 13px; color: #9ca3af; }
+    .back-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 13px; color: #60a5fa; text-decoration: none;
+      padding: 6px 12px; border: 1px solid #374151; border-radius: 6px;
+      transition: all 0.2s;
+    }
+    .back-link:hover { background: #1f2937; color: #93c5fd; }
+
+    .topbar-right { display: flex; gap: 10px; }
+
+    .btn-download {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-family: var(--sans); font-size: 13px; font-weight: 600;
+      padding: 8px 20px; border-radius: 6px; cursor: pointer;
+      border: none; transition: all 0.2s;
+    }
+    .btn-download.primary {
+      background: #1a56db; color: #fff;
+    }
+    .btn-download.primary:hover { background: #1e40af; box-shadow: 0 4px 12px rgba(26,86,219,0.35); }
+
+    /* ── RESUME WRAPPER ── */
+    .resume-wrapper {
+      max-width: 820px;
+      margin: 32px auto 60px;
+      padding: 0 16px;
+    }
+
+    /* ── RESUME PAPER ── */
+    .resume {
+      background: var(--bg-card);
+      padding: 48px 52px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.1), 0 1px 4px rgba(0,0,0,0.08);
+      border-radius: 4px;
+    }
+
+    /* ── HEADER ── */
+    .r-header { margin-bottom: 20px; }
+    .r-name {
+      font-size: 28px; font-weight: 700; color: #111827;
+      letter-spacing: -0.5px; margin-bottom: 4px;
+    }
+    .r-title {
+      font-size: 14px; font-weight: 500; color: var(--accent);
+      margin-bottom: 10px;
+    }
+    .r-contact {
+      display: flex; flex-wrap: wrap; gap: 4px 18px;
+      font-size: 12.5px; color: var(--muted);
+    }
+    .r-contact a { color: var(--accent); text-decoration: none; }
+    .r-contact a:hover { text-decoration: underline; }
+    .r-contact span::before { content: ''; }
+
+    /* ── DIVIDER ── */
+    .r-divider {
+      border: none; border-top: 1.5px solid var(--accent);
+      margin: 16px 0 14px;
+    }
+    .r-divider.thin {
+      border-top: 1px solid var(--border);
+      margin: 10px 0 10px;
+    }
+
+    /* ── SECTION ── */
+    .r-section { margin-bottom: 18px; }
+    .r-section:last-child { margin-bottom: 0; }
+
+    .r-sec-title {
+      font-size: 11px; font-weight: 700; color: var(--accent);
+      letter-spacing: 1.2px; text-transform: uppercase;
+      margin-bottom: 10px;
+      padding-bottom: 4px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ── SUMMARY ── */
+    .r-summary { font-size: 13px; color: var(--muted); line-height: 1.65; }
+
+    /* ── SKILLS ── */
+    .skills-table { width: 100%; border-collapse: collapse; }
+    .skills-table tr td {
+      font-size: 12.5px; padding: 2.5px 0; vertical-align: top;
+    }
+    .skills-table tr td:first-child {
+      font-weight: 600; color: var(--text); width: 175px;
+      white-space: nowrap; padding-right: 12px;
+    }
+    .skills-table tr td:last-child { color: var(--muted); }
+
+    /* ── EXPERIENCE ── */
+    .r-job { margin-bottom: 14px; }
+    .r-job:last-child { margin-bottom: 0; }
+
+    .r-job-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 2px; }
+    .r-job-left { flex: 1; }
+    .r-job-right { text-align: right; flex-shrink: 0; margin-left: 12px; }
+
+    .r-company { font-size: 13.5px; font-weight: 700; color: var(--text); }
+    .r-role    { font-size: 13px;   font-weight: 500; color: var(--accent); }
+    .r-period  { font-size: 12px;   color: var(--dim); font-weight: 500; }
+    .r-location{ font-size: 12px;   color: var(--dim); }
+
+    .r-bullets { margin-top: 6px; padding-left: 0; list-style: none; }
+    .r-bullets li {
+      font-size: 12.5px; color: var(--muted); line-height: 1.6;
+      padding: 2px 0 2px 14px; position: relative;
+    }
+    .r-bullets li::before {
+      content: '•'; position: absolute; left: 0; color: var(--accent); font-size: 14px; line-height: 1.5;
+    }
+
+    /* ── PROJECTS ── */
+    .r-project { margin-bottom: 8px; }
+    .r-project:last-child { margin-bottom: 0; }
+    .r-proj-name { font-size: 13px; font-weight: 600; color: var(--text); display: inline; }
+    .r-proj-desc { font-size: 12.5px; color: var(--muted); display: inline; }
+    .r-proj-stack { font-size: 11.5px; color: var(--accent); margin-top: 2px; }
+
+    /* ── EDUCATION ── */
+    .r-edu { margin-bottom: 10px; }
+    .r-edu:last-child { margin-bottom: 0; }
+    .r-edu-degree { font-size: 13px; font-weight: 600; color: var(--text); }
+    .r-edu-school { font-size: 12.5px; color: var(--muted); }
+    .r-edu-meta   { display: flex; justify-content: space-between; }
+
+    /* ── LEADERSHIP ── */
+    .r-lead-list { list-style: none; padding: 0; }
+    .r-lead-list li {
+      font-size: 12.5px; color: var(--muted); padding: 2px 0 2px 14px; position: relative; line-height: 1.6;
+    }
+    .r-lead-list li::before { content: '•'; position: absolute; left: 0; color: var(--accent); font-size: 14px; line-height: 1.5; }
+
+    /* ── PRINT STYLES ── */
+    @media print {
+      @page {
+        size: letter;
+        margin: 0.55in 0.6in;
+      }
+
+      html, body { background: #fff !important; }
+
+      .topbar { display: none !important; }
+
+      .resume-wrapper {
+        max-width: 100%;
+        margin: 0;
+        padding: 0;
+      }
+
+      .resume {
+        padding: 0;
+        box-shadow: none;
+        border-radius: 0;
+      }
+
+      .r-section { page-break-inside: avoid; }
+      .r-job      { page-break-inside: avoid; }
+      .r-edu      { page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="topbar no-print">
+    <div class="topbar-left">
+      <a href="index.html" class="back-link">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+        Back to Portfolio
+      </a>
+      <span>Rohith Vengala — Resume</span>
+    </div>
+    <div class="topbar-right">
+      <button class="btn-download primary" onclick="downloadPDF()">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download PDF
+      </button>
+    </div>
+  </div>
+
+  <!-- RESUME PAPER -->
+  <div class="resume-wrapper">
+    <div class="resume" id="resume">
+
+      <!-- HEADER -->
+      <div class="r-header">
+        <div class="r-name">Rohith Vengala</div>
+        <div class="r-title">Full Stack Software Engineer</div>
+        <div class="r-contact">
+          <span>California, USA (Open to Relocate)</span>
+          <span>(302) 366-4863</span>
+          <a href="mailto:rvengala2201@gmail.com">rvengala2201@gmail.com</a>
+          <a href="https://www.linkedin.com/in/rohithvengala/" target="_blank">linkedin.com/in/rohithvengala</a>
+          <a href="https://github.com/rohithvengala57" target="_blank">github.com/rohithvengala57</a>
+        </div>
+      </div>
+
+      <hr class="r-divider">
+
+      <!-- SUMMARY -->
+      <div class="r-section">
+        <div class="r-sec-title">Professional Summary</div>
+        <div class="r-summary">
+          Full Stack Software Engineer with 4+ years of experience designing and delivering scalable, cloud-native applications
+          using Python, Java, and modern web technologies in highly regulated and high-traffic environments. Strong background in
+          building backend services, RESTful APIs, and distributed systems, with hands-on experience developing microservices,
+          event-driven workflows, and data-intensive platforms on AWS. Proven ability to integrate machine learning and GenAI
+          capabilities into production systems, including LLM-based applications, real-time model inference, and document
+          intelligence solutions. Collaborative engineer with experience working in Agile teams, mentoring peers, and supporting
+          operational excellence through on-call rotations and incident resolution.
+        </div>
+      </div>
+
+      <hr class="r-divider">
+
+      <!-- SKILLS -->
+      <div class="r-section">
+        <div class="r-sec-title">Technical Skills</div>
+        <table class="skills-table">
+          <tr>
+            <td>Programming Languages</td>
+            <td>Python, Java, TypeScript/JavaScript, C#, SQL, C++</td>
+          </tr>
+          <tr>
+            <td>Frameworks &amp; Libraries</td>
+            <td>Django, Flask, FastAPI, Spring Boot, React.js, Angular, Node.js, Pandas, PySpark, TensorFlow, Scikit-learn</td>
+          </tr>
+          <tr>
+            <td>Cloud &amp; DevOps</td>
+            <td>AWS (Lambda, Step Functions, API Gateway, S3, DynamoDB, SQS/SNS, SageMaker, EMR, CloudWatch), Docker, Kubernetes, Terraform, Ansible, Helm, Jenkins, GitHub Actions, GitLab CI/CD</td>
+          </tr>
+          <tr>
+            <td>Databases</td>
+            <td>PostgreSQL, MySQL, MongoDB, DynamoDB, Redis</td>
+          </tr>
+          <tr>
+            <td>AI &amp; Machine Learning</td>
+            <td>LangChain, OpenAI API, Retrieval-Augmented Generation (RAG), NLP, TensorFlow, Scikit-learn</td>
+          </tr>
+          <tr>
+            <td>Architecture</td>
+            <td>Distributed Systems, Microservices, Event-Driven Architecture, RESTful APIs, GraphQL, WebSockets</td>
+          </tr>
+          <tr>
+            <td>Security</td>
+            <td>OAuth2, JWT, RBAC, AWS KMS, HTTPS, Secure API Design, Encryption Standards</td>
+          </tr>
+          <tr>
+            <td>Observability &amp; Tools</td>
+            <td>Prometheus, Grafana, Datadog, Splunk, ELK Stack, CloudWatch, Git, JIRA, Confluence</td>
+          </tr>
+          <tr>
+            <td>Testing</td>
+            <td>PyTest, UnitTest, Selenium, TestNG, Postman, API Testing, UI Automation</td>
+          </tr>
+        </table>
+      </div>
+
+      <hr class="r-divider">
+
+      <!-- EXPERIENCE -->
+      <div class="r-section">
+        <div class="r-sec-title">Work Experience</div>
+
+        <!-- Capital One -->
+        <div class="r-job">
+          <div class="r-job-header">
+            <div class="r-job-left">
+              <div class="r-company">Capital One</div>
+              <div class="r-role">Full Stack Software Engineer</div>
+            </div>
+            <div class="r-job-right">
+              <div class="r-period">Jan 2025 – Present</div>
+              <div class="r-location">USA</div>
+            </div>
+          </div>
+          <ul class="r-bullets">
+            <li>Architected a distributed microservices migration strategy to replatform Discover's Identity Theft Protection (ITP) system into Capital One's Credit Wise ecosystem, defining service boundaries, API contracts, and data flow for ~5M users.</li>
+            <li>Designed and implemented secure, idempotent REST APIs using Java (Spring Boot), enabling seamless integration of identity monitoring, alerting, and resolution workflows with Credit Wise while ensuring backward compatibility.</li>
+            <li>Engineered traffic routing and phased migration strategy using Capital One's MPath system, implementing traffic splitting, fallback mechanisms, and zero-downtime cutover for large-scale user migration.</li>
+            <li>Built and deployed containerized infrastructure using Docker and Kubernetes, implementing HPA-based auto-scaling, rolling deployments, and environment isolation to support high availability and controlled rollout.</li>
+            <li>Architected and contributed to a large-scale Prescreen Decisioning Platform processing 1M+ daily applications, designing distributed services for eligibility evaluation, risk scoring, and decision orchestration, improving approval turnaround time by 35%.</li>
+            <li>Designed stateless, low-latency microservices using Python (FastAPI) deployed on AWS Lambda and API Gateway, ensuring scalable request handling and consistent API contracts across decisioning workflows.</li>
+            <li>Refactored monolithic workflows into containerized, independently scalable services using Docker and AWS Fargate, improving fault isolation and enabling elastic scaling during high-volume prescreen campaigns.</li>
+            <li>Engineered data processing pipelines using Apache Spark (PySpark) on Amazon EMR to standardize large-scale credit and transactional datasets in Amazon S3 for downstream decisioning consistency.</li>
+            <li>Integrated real-time ML inference pipelines via AWS SageMaker, orchestrating model scoring within decision services and improving risk prediction accuracy by 18%.</li>
+            <li>Optimized system performance and data access layers using PostgreSQL query tuning and Redis caching, reducing API latency by ~30% and improving overall system throughput.</li>
+          </ul>
+        </div>
+
+        <hr class="r-divider thin">
+
+        <!-- Amazon -->
+        <div class="r-job">
+          <div class="r-job-header">
+            <div class="r-job-left">
+              <div class="r-company">Amazon</div>
+              <div class="r-role">Software Development Engineer</div>
+            </div>
+            <div class="r-job-right">
+              <div class="r-period">Oct 2021 – Jan 2023</div>
+              <div class="r-location">Hyderabad, India</div>
+            </div>
+          </div>
+          <ul class="r-bullets">
+            <li>Architected and owned a scalable 3P Licensing Brands seller onboarding platform, designing modular backend services and UI integrations to support high-volume seller registration, licensing validation, and end-to-end onboarding workflows.</li>
+            <li>Designed a state-driven distributed workflow architecture using AWS Step Functions, decomposing onboarding into independent Lambda-based micro-tasks with built-in retries, fault isolation, and idempotent processing.</li>
+            <li>Defined and implemented robust API contracts using AWS API Gateway and REST principles, enabling secure, versioned, and reliable communication across frontend, orchestration, and backend services.</li>
+            <li>Modeled a high-performance NoSQL data layer using Amazon DynamoDB, optimizing for access patterns, state tracking, and fault-tolerant reprocessing with strong consistency considerations.</li>
+            <li>Engineered an event-driven architecture using Amazon SQS and SNS to decouple services, enable asynchronous processing, and improve system scalability, resiliency, and failure recovery.</li>
+            <li>Led the system migration of licensing fee processing across financial platforms, ensuring transactional integrity, backward compatibility, and accurate reconciliation through Java- and SQL-based validation frameworks.</li>
+            <li>Designed a secure document storage architecture using Amazon S3 with AWS KMS encryption, implementing fine-grained access control and compliance-ready data protection mechanisms.</li>
+            <li>Enhanced observability and reliability by designing centralized logging, metrics, and alerting systems using Amazon CloudWatch, reducing incident resolution time and improving system health visibility.</li>
+            <li>Built and integrated CI/CD-driven automated testing frameworks (Selenium, TestNG) into AWS CodePipeline, ensuring regression safety and improving deployment confidence in distributed systems.</li>
+            <li>Contributed to operational excellence through on-call ownership, incident response, root cause analysis (RCA), design reviews, and mentoring engineers on distributed system best practices.</li>
+          </ul>
+        </div>
+
+        <hr class="r-divider thin">
+
+        <!-- Kickstartx -->
+        <div class="r-job">
+          <div class="r-job-header">
+            <div class="r-job-left">
+              <div class="r-company">Kickstartx</div>
+              <div class="r-role">Software Developer</div>
+            </div>
+            <div class="r-job-right">
+              <div class="r-period">Oct 2019 – Sept 2021</div>
+              <div class="r-location">Hyderabad, India</div>
+            </div>
+          </div>
+          <ul class="r-bullets">
+            <li>Architected and built a scalable Learning Management System (LMS) from scratch, designing distributed backend services capable of handling ~800 requests/second using Python, Django, and PostgreSQL.</li>
+            <li>Designed a modular, service-oriented architecture with well-defined REST APIs for user management, course delivery, assessments, and analytics, enabling seamless feature expansion and multi-tenant scalability.</li>
+            <li>Engineered a multi-tenant system design with tenant isolation, role-based access control (RBAC), and OAuth2 authentication, ensuring secure and efficient access across multiple organizations.</li>
+            <li>Optimized database architecture and query performance by designing normalized schemas, indexing strategies, and concurrency handling mechanisms, improving system throughput and reliability under heavy load.</li>
+            <li>Implemented containerized microservices deployment using Docker and Kubernetes, enabling horizontal scaling, high availability, and environment consistency across development and production.</li>
+            <li>Built end-to-end CI/CD pipelines to automate build, test, and deployment workflows, reducing release cycles and ensuring consistent delivery of high-quality software.</li>
+            <li>Established a comprehensive testing architecture (unit, integration, E2E, API automation) integrated into CI/CD, ensuring system resilience and minimizing production defects.</li>
+            <li>Led cross-functional system design discussions, collaborating with product, frontend, and QA teams to translate business requirements into scalable technical solutions.</li>
+            <li>Mentored a team of 6 engineers, driving code quality, design best practices, and scalable architecture adoption across the engineering team.</li>
+          </ul>
+        </div>
+      </div>
+
+      <hr class="r-divider">
+
+      <!-- PROJECTS -->
+      <div class="r-section">
+        <div class="r-sec-title">Projects</div>
+
+        <div class="r-project">
+          <span class="r-proj-name">RAG Document Q&amp;A — </span>
+          <span class="r-proj-desc">Built a Retrieval-Augmented Generation (RAG) document Q&amp;A system for long PDFs, implementing chunking, embeddings, and vector search to deliver grounded answers with citations, supported by an evaluation framework for response faithfulness.</span>
+          <div class="r-proj-stack">Tech: Python, LangChain, OpenAI, Vector Search, Embeddings</div>
+        </div>
+
+        <div class="r-project">
+          <span class="r-proj-name">Compliance/Policy Extractor — </span>
+          <span class="r-proj-desc">Designed and implemented an LLM-based compliance policy extractor that converts unstructured documents into validated structured data, incorporating schema enforcement, confidence scoring, and idempotent retries to ensure accuracy and reliability at scale.</span>
+          <div class="r-proj-stack">Tech: Python, OpenAI API, FastAPI, Schema Validation, NLP</div>
+        </div>
+
+        <div class="r-project">
+          <span class="r-proj-name">Face Mask Detection — </span>
+          <span class="r-proj-desc">Real-time face mask detection system using deep learning, achieving high accuracy across multiple face orientations and lighting conditions. Published in JAC: Journal of Composition Theory (JCT).</span>
+          <div class="r-proj-stack">Tech: Python, TensorFlow, OpenCV, Deep Learning, Computer Vision</div>
+        </div>
+      </div>
+
+      <hr class="r-divider">
+
+      <!-- EDUCATION -->
+      <div class="r-section">
+        <div class="r-sec-title">Education</div>
+
+        <div class="r-edu">
+          <div class="r-edu-meta">
+            <div class="r-edu-degree">Master of Science in Information Systems and Technology</div>
+          </div>
+          <div class="r-edu-school">Wilmington University — Wilmington Manor, Delaware, USA</div>
+        </div>
+
+        <div class="r-edu">
+          <div class="r-edu-meta">
+            <div class="r-edu-degree">Bachelor of Technology in Computer Science and Engineering</div>
+          </div>
+          <div class="r-edu-school">Anurag Group of Institutions — Majarguda, Telangana, India</div>
+        </div>
+      </div>
+
+      <hr class="r-divider">
+
+      <!-- LEADERSHIP & PUBLICATIONS -->
+      <div class="r-section">
+        <div class="r-sec-title">Leadership &amp; Publications</div>
+        <ul class="r-lead-list">
+          <li>Winner — Smart India Hackathon 2020 (1st place among 400+ competing teams nationwide)</li>
+          <li>Mentor for junior engineers and active contributor to hiring and interview panels at Amazon</li>
+          <li>Publication: <em>"Face Mask Detection using Deep Learning"</em> — JAC: Journal of Composition Theory (JCT)</li>
+        </ul>
+      </div>
+
+    </div><!-- /resume -->
+  </div><!-- /resume-wrapper -->
+
+  <script>
+    function downloadPDF() {
+      const btn = document.querySelector('.btn-download.primary');
+      btn.innerHTML = `
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="animation:spin 1s linear infinite"><path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0"/></svg>
+        Preparing...
+      `;
+      btn.disabled = true;
+
+      // brief delay so browser renders the button state before print dialog
+      setTimeout(() => {
+        window.print();
+        btn.innerHTML = `
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download PDF
+        `;
+        btn.disabled = false;
+      }, 300);
+    }
+
+    // keyboard shortcut
+    document.addEventListener('keydown', e => {
+      if((e.metaKey || e.ctrlKey) && e.key === 'p'){
+        e.preventDefault();
+        downloadPDF();
+      }
+    });
+  </script>
+  <style>
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+</body>
+</html>
